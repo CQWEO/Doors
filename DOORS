@@ -17,7 +17,7 @@ local AvatarIcon = Players:GetUserThumbnailAsync(LocalPlayer.UserId,Enum.Thumbna
 local MainUI = LocalPlayer.PlayerGui.MainUI
 local Main_Game = MainUI.Initiator.Main_Game
 local Modules = Main_Game.RemoteListener.Modules
-local SpeedBoost = 0
+local SpeedBoost = 4
 local ScreechSafeRooms = {}
 local PrimaryPart = Character.PrimaryPart
 local CurrentRooms = workspace.CurrentRooms
@@ -58,7 +58,7 @@ local A90Module
 local CustomA90Module
 local DoorRange
 local SpoofMotor
-local ESP_Items = {Bed={"Bed",9,5},GoldPile={"GoldPile",5.5},Wardrobe={"Wardrobe",5,5},Lighter={"Lighter",1.5},Lockpick={"Lockpicks",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Shears={"Shears",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shakelight",1.5},Scanner={"iPad",1.5}}
+local ESP_Items = {Screech={"Screech",8.5},Glitch={"Glitch",8},Spider={"Spider",7.5},Locker={"Locker",7},Bed={"Bed",6.5},GoldPile={"GoldPile",6},Wardrobe={"Wardrobe",5,5},Lighter={"Lighter",1.5},Lockpick={"Lockpicks",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Shears={"Shears",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shakelight",1.5},Scanner={"iPad",1.5}}
 local ESP_Entities = {RushMoving={"Rush",5},AmbushMoving={"Ambush",5},FigureRagdoll={"Figure",7},FigureLibrary={"Figure",7},SeekMoving={"Seek",5.5},Screech={"Screech",2},Eyes={"Eyes",4},Snare={"Snare",2},A60={"A-60",10},A120={"A-120",10}}
 local ESP_Other = {Door={"Door",5},LeverForGate={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}}
 local MainFrame = MainUI.MainFrame
@@ -176,7 +176,7 @@ local function ApplySettings(Object)
             if Object:FindFirstChild("RushNew") then
                 if not Object.RushNew:WaitForChild("PlaySound").Playing then return end
             end
-            local Color = ESP_Items[Object.Name] and Color3.new(1,1) or ESP_Entities[Object.Name] and Color3.new(1) or Color3.new(0,1,1)
+            local Color = ESP_Items[Object.Name] and Color3.new(9,5,9) or ESP_Entities[Object.Name] and Color3.new(1) or Color3.new(0,1,1)
             if Object.Name == "RushMoving" or Object.Name == "AmbushMoving" or Object.Name == "Eyes" or Object.Name == "A60" or Object.Name == "A120" then
                 for i = 1, 100 do
                     if Object:FindFirstChildOfClass("Part") then
