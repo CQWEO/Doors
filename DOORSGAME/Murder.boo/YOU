@@ -1,7 +1,7 @@
 if game.CoreGui:FindFirstChild("FluxLib") or game.CoreGui:FindFirstChild("Message") then return end
 
 local Flux = loadstring(game:HttpGet("https://lolcat.boo/assets/flux-fixed"))()
-local Window = Flux:Window("YOU|PREMIUM", "Doors", Color3.new(9,5.9), Enum.KeyCode.RightControl)
+local Window = Flux:Window("FLAME🔥/WATERSEA🌊", "Doors", Color3.new(9,5.9), Enum.KeyCode.RightControl)
 local Tab = Window:Tab("Main", "rbxassetid://6026568198")
 local Tab2 = Window:Tab("Games", "rbxassetid://6031763426")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -17,7 +17,7 @@ local AvatarIcon = Players:GetUserThumbnailAsync(LocalPlayer.UserId,Enum.Thumbna
 local MainUI = LocalPlayer.PlayerGui.MainUI
 local Main_Game = MainUI.Initiator.Main_Game
 local Modules = Main_Game.RemoteListener.Modules
-local SpeedBoost = 4
+local SpeedBoost = 0
 local ScreechSafeRooms = {}
 local PrimaryPart = Character.PrimaryPart
 local CurrentRooms = workspace.CurrentRooms
@@ -58,7 +58,7 @@ local A90Module
 local CustomA90Module
 local DoorRange
 local SpoofMotor
-local ESP_Items = {Screech={"Screech",8.5},Glitch={"Glitch",8},Spider={"Spider",7.5},Bed={"Bed",6.5},Wardrobe={"Wardrobe",5,5},Lighter={"Lighter",1.5},Lockpick={"Lockpicks",1.5},Vitamins={"Vitamins",1.5},Crucifix={"Crucifix",1.5},CrucifixWall={"Crucifix",1.5},SkeletonKey={"Skeleton Key",1.5},Flashlight={"Flashlight",1.5},Candle={"Candle",1.5},LiveBreakerPolePickup={"Fuse",1.5},Shears={"Shears",1.5},Battery={"Battery",1.5},PickupItem={"Paper",1.5},ElectricalKeyObtain={"Electrical Key",1.5},Shakelight={"Shakelight",1.5},Scanner={"iPad",1.5},GoldPile={"Gold",0.5}}
+local ESP_Items = Bed={" ",6.5},Wardrobe={" ",5,5}
 local ESP_Entities = {RushMoving={"Rush",5},AmbushMoving={"Ambush",5},FigureRagdoll={"Figure",7},FigureLibrary={"Figure",7},SeekMoving={"Seek",5.5},Screech={"Screech",2},Eyes={"Eyes",4},Snare={"Snare",2},A60={"A-60",10},A120={"A-120",10}}
 local ESP_Other = {Door={"Door",5},LeverForGate={"Lever",3},GoldPile={"Gold",0.5},Bandage={"Bandage",0.5}}
 local MainFrame = MainUI.MainFrame
@@ -453,67 +453,6 @@ if Floor.Value == "Hotel" or Floor.Value == "Fools" then
         end
     end)
 end
-Tab:Toggle("INTERACT WITH ROOMS","Sets the Enabled property of all Proximity Prompts to true. Useful for getting to the Rooms without a Skeleton Key.",false,function(Bool)
-    EnableInteractions = Bool
-    for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
-        if Object:IsA("ProximityPrompt") then
-            if EnableInteractions and Object.Enabled then
-                table.insert(OldEnabled,Object)
-            end
-            Object.Enabled = EnableInteractions
-            if not EnableInteractions then
-                if table.find(OldEnabled, Object) then
-                    Object.Enabled = true
-                end
-            end
-            Object:GetPropertyChangedSignal("Enabled"):Connect(function()
-                if EnableInteractions then
-                    Object.Enabled = true
-                end
-            end)
-        end
-    end
-    if not EnableInteractions then
-        for index in pairs(OldEnabled) do
-            table.remove(OldEnabled, index)
-        end
-    end
-end)
-Tab:Toggle("DOORS RANGE","Makes it so you can open doors from much further away.",false,function(Bool)
-    if Bool then
-        DoorRange = RunService.Heartbeat:Connect(function()
-            if not workspace:FindFirstChild("A120") then
-                CurrentRooms:WaitForChild(LatestRoom.Value):WaitForChild("Door"):WaitForChild("ClientOpen"):FireServer()
-            end
-        end)
-    else
-        DoorRange:Disconnect()
-    end
-end)
-Tab:Toggle("CLICK FROM VERY FAR","Doubles the Max Activation Distance for Proximity Prompts.",false,function(Bool)
-    IncreasedDistance = Bool
-    for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
-        if Object:IsA("ProximityPrompt") then
-            Object.MaxActivationDistance *= IncreasedDistance and 2 or 0.5
-        end
-    end
-end)
-Tab:Toggle("REMOVE HOLD","Removes having to hold down the button for a long period of time on Proximity Prompts.",false,function(Bool)
-    InstantInteract = Bool
-    for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
-        if Object:IsA("ProximityPrompt") then
-            Object.HoldDuration = -Object.HoldDuration
-        end
-    end
-end)
-Tab:Toggle("LOOT ITEM NOCLIP","Lets you interact with Proximity Prompts through Parts. Could be useful for grabbing book faster.",false,function(Bool)
-    InteractNoclip = Bool
-    for _,Object in pairs(workspace.CurrentRooms:GetDescendants()) do
-        if Object:IsA("ProximityPrompt") then
-            Object.RequiresLineOfSight = not InteractNoclip
-        end
-    end
-end)
 Tab:Toggle("AUTO COMPLETE POWER ELECTRO IN 10 SECONDS","Tricks the game into thinking you completed the breaker puzzle at Room 100. May take up to 10 seconds to work.",false,function(Bool)
     NoBreaker = Bool
     while task.wait(1) do
@@ -535,7 +474,7 @@ if Floor.Value == "Rooms" then
         DisableA90 = Bool
     end)
 end
-Tab2:Toggle("SUPER OTHER ESP","Highlights items like Keys, Books, and Crucifixes through walls.",false,function(Bool)
+Tab2:Toggle("OTHER ESP","Highlights items like Keys, Books, and Crucifixes through walls.",false,function(Bool)
     ItemESP = Bool
     for _,Object in pairs(workspace:GetDescendants()) do
         if ESP_Items[Object.Name] then
